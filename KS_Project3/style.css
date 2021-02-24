@@ -1,0 +1,18 @@
+html {
+    position: relative;
+    min-height: 100%;
+  }
+
+.nav-item {
+    background-color: #1e5af1;
+    color: #cdcdd4 !important;
+    text-align: right;
+
+}
+
+.navbar-brand {
+    background-color: #1e5af1;
+    color: #cdcdd4 !important;
+    text-align: right;
+
+}

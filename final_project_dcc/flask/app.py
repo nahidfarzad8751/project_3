@@ -13,9 +13,10 @@ app = Flask(__name__)
 def index():
     print('STARTING! '*20)
     mapbox_access_token = "pk.eyJ1IjoiZGF2aWRjb3kiLCJhIjoiY2tqcHU1YzBzOHY4ZjJxcWpkNGI5b2h2MSJ9.CsPttIW0Q41kP2uOBN6n8g"
-    #pdb.set_trace()
+    # pdb.set_trace()
     print(os.getcwd())
-    df = pd.read_csv('./flask/static/data/data.csv')
+    # df = pd.read_csv('./static/data/data.csv')
+    df = pd.read_csv('./static/data/data.csv')
     #df = df.head(5)
     return render_template('index.html', tables = [df.to_html(classes='female')],
         titles=['IDKLOL'],

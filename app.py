@@ -21,7 +21,14 @@ def index():
     return render_template('index.html', tables = [df.to_html(classes='female')],
         titles=['IDKLOL'],
         mapbox_access_token=mapbox_access_token)
-
-
+@app.route('/neighborhood')
+def neighborhood():
+    return render_template('neighborhood.html')
+@app.route('/typesofcrimes')
+def crime():
+    return render_template('crime.html')
+@app.route('/timeofyear')
+def year():
+    return render_template('Timeofyear.html')
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <form action="http://localhost:5000/login" method="GET">
+      <p>Enter Name:</p>
+      <p><input type="text" name="nm" /></p>
+      <p><input type="submit" value="submit" /></p>  
+    </form> -->
+    <form action="http://localhost:5000/prediction" method="POST">
+      <div class="form-group row">
+        <label
+          for="colFormLabelSm"
+          class="col-sm-2 col-form-label col-form-label-sm"
+          >Beat</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="number"
+            name="beat"
+            class="form-control form-control-sm"
+            id="colFormLabelSm"
+            value="604"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="colFormLabel" class="col-sm-2 col-form-label"
+          >Occur Time</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="number"
+            name="occur_time"
+            class="form-control"
+            id="colFormLabel"
+            value="1630"
+          />
+        </div>
+      </div>
+      <label class="my-1 mr-2" for="inlineFormCustomSelectPref"
+        >Neighborhood</label
+      >
+      <select
+        class="custom-select my-1 mr-sm-2"
+        id="inlineFormCustomSelectPref"
+        name="neighborhood"
+      >
+        <option selected>Choose...</option>
+        <option value="0">Brookhaven</option>
+        <option value="1">Buckhead</option>
+        <option value="2">Downtown</option>
+        <option value="3">Midtown</option>
+        <option value="4">Old Fourth Ward</option>
+      </select>
+      <div class="form-group row">
+        <label
+          for="colFormLabelLg"
+          class="col-sm-2 col-form-label col-form-label-lg"
+          >Location Type</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="number"
+            name="location_type"
+            class="form-control form-control-lg"
+            id="colFormLabelLg"
+            value="21"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label
+          for="colFormLabelLg"
+          class="col-sm-2 col-form-label col-form-label-lg"
+          >Latitude</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="number"
+            name="latitude"
+            class="form-control form-control-lg"
+            id="colFormLabelLg"
+            value="33.76142"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label
+          for="colFormLabelLg"
+          class="col-sm-2 col-form-label col-form-label-lg"
+          >Longitude</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="number"
+            name="longitude"
+            class="form-control form-control-lg"
+            id="colFormLabelLg"
+            value="-84.36492"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label
+          for="colFormLabelLg"
+          class="col-sm-2 col-form-label col-form-label-lg"
+          >Year</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="text"
+            name="year"
+            class="form-control form-control-lg"
+            id="colFormLabelLg"
+            value="2013"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label
+          for="colFormLabelLg"
+          class="col-sm-2 col-form-label col-form-label-lg"
+          >Month</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="number"
+            name="month"
+            class="form-control form-control-lg"
+            id="colFormLabelLg"
+            value="12"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label
+          for="colFormLabelLg"
+          class="col-sm-2 col-form-label col-form-label-lg"
+          >Day</label
+        >
+        <div class="col-sm-10">
+          <input
+            type="number"
+            name="day"
+            class="form-control form-control-lg"
+            id="colFormLabelLg"
+            value="16"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label
+          for="colFormLabelLg"
+          class="col-sm-2 col-form-label col-form-label-lg"
+          >DayofWeek</label
+        >
+        <!-- <div class="col-sm-10">
+          <input
+            type="number"
+            name="dayofweek"
+            class="form-control form-control-lg"
+            id="colFormLabelLg"
+            value="0"
+          />
+        </div>
+      </div> -->
+      <select
+        class="custom-select my-1 mr-sm-2"
+        id="inlineFormCustomSelectPref"
+        name="dayofweek"
+      >
+        <option selected>Choose...</option>
+        <option value="0">Monday</option>
+        <option value="1">Tuesday</option>
+        <option value="2">Wednesday</option>
+        <option value="3">Thursday</option>
+        <option value="4">Friday</option>
+        <option value="5">Saturday</option>
+        <option value="6">Sunday</option>
+      </select>
+      <p><input type="submit" value="submit" /></p>
+    </form>
+  </body>
+</html>

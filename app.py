@@ -30,5 +30,35 @@ def crime():
 @app.route('/timeofyear')
 def year():
     return render_template('Timeofyear.html')
+
+
+
+
+@app.route('/success/<name>')
+def success(name):
+   return 'welcome %s' % name
+
+@app.route('/prediction', methods = ['POST', 'GET'])
+def Prediction():
+    if request.method == 'POST':
+        pdb.set_trace()
+        beat = request.form['beat']
+        occur_time = request.form['occur_time']
+        neighborhood = request.form['neighborhood']
+        location_type = request.form['location_type']
+        latitude = request.form['latitude']
+        longitude = request.form['longitude']
+        year = request.form['year']
+        month = request.form['month']
+        day = request.form['day']
+        dayofweek = request.form['dayofweek']
+        pdb.set_trace()
+        #return redirect(url_for('success',name = user))
+    else:
+      #user = request.args.get('nm')
+      #return redirect(url_for('success',name = user))
+      return render_template('prediction.html')
+
+
 if __name__ == "__main__":
     app.run(debug=True)

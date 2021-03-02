@@ -3,6 +3,15 @@ from flask import request, url_for, render_template, redirect
 import pandas as pd
 import numpy as np
 import pdb, os
+import joblib
+import keras
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer 
+from sklearn.preprocessing import LabelEncoder
+
+from platform import python_version
+print(python_version())
 
 # Create an instance of our Flask app.
 app = Flask(__name__)
@@ -34,26 +43,40 @@ def year():
 
 
 
-@app.route('/success/<name>')
-def success(name):
-   return 'welcome %s' % name
+@app.route('/Results/<var>')
+def Results(var):
+    print('successs')
+    pdb.set_trace()
+    #return render_template('Results.html')
+    return 'welcome %s' % var
 
 @app.route('/prediction', methods = ['POST', 'GET'])
 def Prediction():
     if request.method == 'POST':
-        pdb.set_trace()
-        beat = request.form['beat']
-        occur_time = request.form['occur_time']
-        neighborhood = request.form['neighborhood']
-        location_type = request.form['location_type']
-        latitude = request.form['latitude']
-        longitude = request.form['longitude']
-        year = request.form['year']
-        month = request.form['month']
-        day = request.form['day']
-        dayofweek = request.form['dayofweek']
-        pdb.set_trace()
-        #return redirect(url_for('success',name = user))
+        #This list has to be put together in the same format as saved in the Keras model
+        X_unscaled = np.array([float(request.form['beat']),
+                      float(request.form['occur_time']),
+                      float(request.form['neighborhood']),
+                      float(request.form['location_type']),
+                      float(request.form['latitude']),
+                      float(request.form['longitude']),
+                      float(request.form['year']),
+                      float(request.form['month']),
+                      float(request.form['day']),
+                      float(request.form['dayofweek']) ] )
+
+        X_unscaled = X_unscaled.reshape(1,10)# Unfortunately needs to be reshaped from (,10) to (1,10)
+        reconstructed_model = keras.models.load_model("models/DL/deep_learning_100_100_10.h5", compile=True)
+        encoded_predictions = reconstructed_model.predict_classes(X_unscaled)
+        #pdb.set_trace()
+        label_encoder = LabelEncoder()
+        label_encoder.classes_ = np.load('models/DL/dl_classes.npy',allow_pickle=True)
+        prediction_labels = label_encoder.inverse_transform(encoded_predictions)
+        prediction_labels
+        #pdb.set_trace()
+        #return render_template()
+        #return redirect(url_for('Results', name = prediction_labels))
+        return redirect(url_for('Results', var = prediction_labels))
     else:
       #user = request.args.get('nm')
       #return redirect(url_for('success',name = user))

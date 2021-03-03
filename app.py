@@ -3,6 +3,7 @@ from flask import request, url_for, render_template, redirect
 import pandas as pd
 import numpy as np
 import pdb, os
+from os import environ
 #import joblib
 import keras
 from sklearn.model_selection import train_test_split
@@ -46,16 +47,16 @@ def contact():
 
 
 
-@app.route('/Results/<var>')
+@app.route('/Results/<var>', methods=['GET'])
 def Results(var):
-    print('successs')
-    pdb.set_trace()
-    #return render_template('Results.html')
-    return 'welcome %s' % var
+    print('successs' * 5    )
+    #pdb.set_trace()#
+    return render_template('html.html')
+    #return 'welcome %s' % var
 
 @app.route('/prediction', methods = ['POST', 'GET'])
 def Prediction():
-    if request.method == 'POST':
+    if request.method == 'POST':#Used to send HTML form data to the server
         #This list has to be put together in the same format as saved in the Keras model
         X_unscaled = np.array([float(request.form['beat']),
                       float(request.form['occur_time']),
@@ -79,11 +80,14 @@ def Prediction():
         #pdb.set_trace()
         #return render_template()
         #return redirect(url_for('Results', name = prediction_labels))
-        return redirect(url_for('Results', var = prediction_labels))
-    else:
+        print('TESTING '*5)
+        #return redirect(url_for('Results', var = prediction_labels))
+        return 'Predicted Crime is:::  %s' % prediction_labels
+    else:# GET message is send, and the server returns data
       #user = request.args.get('nm')
       #return redirect(url_for('success',name = user))
       return render_template('prediction.html')
+
 
 
 if __name__ == "__main__":

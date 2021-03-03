@@ -39,6 +39,9 @@ def crime():
 @app.route('/timeofyear')
 def year():
     return render_template('Timeofyear.html')
+@app.route('/contactinfo')
+def contact():
+    return render_template('contactinfo.html')
 
 
 

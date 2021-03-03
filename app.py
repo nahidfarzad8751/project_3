@@ -43,7 +43,9 @@ def year():
 @app.route('/contactinfo')
 def contact():
     return render_template('contactinfo.html')
-
+@app.route('/index')
+def homepage():
+    return render_template('index.html')
 
 
 

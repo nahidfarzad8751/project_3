@@ -49,7 +49,7 @@ def homepage():
 
 
 
-@app.route('/Results/<var>', methods=['GET'])
+@app.route('/results/<var>', methods=['GET'])
 def Results(var):
     print('successs' * 5    )
     #pdb.set_trace()#

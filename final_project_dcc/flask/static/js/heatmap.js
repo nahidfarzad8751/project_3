@@ -33,7 +33,7 @@ function creatHeatMap(data) {
 
 function createMap() {
   let myMap = L.map("map", {
-    center: [33.68845, -84.49328],
+    center: [33.68845, 84.49328],
     zoom: 13,
   });
   L.tileLayer(

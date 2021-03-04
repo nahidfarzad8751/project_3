@@ -53,8 +53,8 @@ def homepage():
 def Results(var):
     print('successs' * 5    )
     #pdb.set_trace()#
-    return render_template('html.html')
-    #return 'welcome %s' % var
+    #return render_template('results.html')
+    return 'The Predicted Crime is:  %s' % var
 
 @app.route('/prediction', methods = ['POST', 'GET'])
 def Prediction():
@@ -87,14 +87,15 @@ def Prediction():
         #Make a prediction from the scalled value
 
         encoded_predictions = reconstructed_model.predict_classes(x_scaled) #This gives an encoded prediction from 0-9
-        print(encoded_predictions)
-        
+        #print(encoded_predictions)
         
         prediction_labels = label_encoder.inverse_transform(encoded_predictions)
-        #pdb.set_trace()
         print(f'The predicted crime is: {prediction_labels[0]}')
 
-        return 'Predicted Crime is:  %s' % prediction_labels[0]
+        #return 'Predicted Crime is:  %s' % prediction_labels[0]
+        return redirect(url_for('Results', var = prediction_labels[0]))
+        #return 'Predicted Crime is:::  %s' % prediction_labels
+        
 
     else:# GET message is send, and the server returns data
       #user = request.args.get('nm')

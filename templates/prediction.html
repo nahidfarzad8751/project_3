@@ -64,8 +64,20 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
           <p class="w3-text-grey w3-padding-8">
             Additionally, all unnecesary files were removed outside the repo such as our raw data which was over 60Mb.
           </p>
+          <p class="w3-text-grey w3-padding-8">
+            Lastly, the Deep-Learning model had previously been run in a separate workbook and
+            the model needed to be saved somehow for later on-the-fly predictions. Thus the
+            optimized and scaled grid model had been saved to a Keras h5 file in an external
+            directory. However, since it was found there would be no way to call a "complete"
+            model and simply input new data to get a prediction, the "Scaler" and dependent
+            y-values that were encoded had to also be saved externally on disk. Thus after
+            pressing the "submit" button on this page, the 3 saved files that represent the one
+            model can then feed in all of the user selected independent variables and output a
+            prediction "y or UCR Literal".
+          </p>
           <h5 class="w3-padding-8">
-            Select from the following options below to get a prediction of a crime based of a Deep-Learning model.
+            Select from the following options below to get a prediction of a crime based of a
+            Deep-Learning model.
           </h5>
         </div>
       </div>

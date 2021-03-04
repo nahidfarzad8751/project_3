@@ -71,7 +71,7 @@ def Prediction():
                       float(request.form['day']),
                       float(request.form['dayofweek']) ] )
 
-        pdb.set_trace()
+        #pdb.set_trace()
         reconstructed_model = keras.models.load_model('ml_models/DL/model_200_200_200_10/')
         # load the scaler
         scaler = joblib.load('ml_models/DL/scaler_200_200_200_10.sav')
@@ -91,7 +91,7 @@ def Prediction():
         
         
         prediction_labels = label_encoder.inverse_transform(encoded_predictions)
-        pdb.set_trace()
+        #pdb.set_trace()
         print(f'The predicted crime is: {prediction_labels[0]}')
 
         return 'Predicted Crime is:  %s' % prediction_labels[0]

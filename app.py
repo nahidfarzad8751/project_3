@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import pdb, os
 from os import environ
-#import joblib
+import joblib
 import keras
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
@@ -71,25 +71,35 @@ def Prediction():
                       float(request.form['day']),
                       float(request.form['dayofweek']) ] )
 
-        X_unscaled = X_unscaled.reshape(1,10)# Unfortunately needs to be reshaped from (,10) to (1,10)
-        reconstructed_model = keras.models.load_model("models/DL/deep_learning_100_100_10.h5", compile=True)
-        encoded_predictions = reconstructed_model.predict_classes(X_unscaled)
-        #pdb.set_trace()
+        pdb.set_trace()
+        reconstructed_model = keras.models.load_model('ml_models/DL/model_200_200_200_10/')
+        # load the scaler
+        scaler = joblib.load('ml_models/DL/scaler_200_200_200_10.sav')
+        # load the encoding for y (UCR Literal)
         label_encoder = LabelEncoder()
-        label_encoder.classes_ = np.load('models/DL/dl_classes.npy',allow_pickle=True)
+        label_encoder.classes_ = np.load('ml_models/DL/classes.sav',allow_pickle=True)
+
+        #Transform the x data to a scaled version that is appropriate for the model
+        X_unscaled = X_unscaled.reshape(1,10)# Unfortunately needs to be reshaped from (,10) to (1,10)
+        
+        x_scaled = scaler.transform(X_unscaled)
+
+        #Make a prediction from the scalled value
+
+        encoded_predictions = reconstructed_model.predict_classes(x_scaled) #This gives an encoded prediction from 0-9
+        print(encoded_predictions)
+        
+        
         prediction_labels = label_encoder.inverse_transform(encoded_predictions)
-        prediction_labels
-        #pdb.set_trace()
-        #return render_template()
-        #return redirect(url_for('Results', name = prediction_labels))
-        print('TESTING '*5)
-        #return redirect(url_for('Results', var = prediction_labels))
-        return 'Predicted Crime is:::  %s' % prediction_labels
+        pdb.set_trace()
+        print(f'The predicted crime is: {prediction_labels[0]}')
+
+        return 'Predicted Crime is:  %s' % prediction_labels[0]
+
     else:# GET message is send, and the server returns data
       #user = request.args.get('nm')
       #return redirect(url_for('success',name = user))
       return render_template('prediction.html')
-
 
 
 if __name__ == "__main__":

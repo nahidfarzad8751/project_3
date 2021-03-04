@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">
+<title>Atlanta Crime</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
@@ -10,24 +12,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
 .fa-anchor,.fa-coffee {font-size:200px}
 </style>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Atlanta Crime</title>
-
-    <!-- Leaflet CSS -->
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-      crossorigin=""
-    />
-    <!-- Our CSS -->
-    <link rel="stylesheet" href="./static/css/style.css" />
-    <!-- <link rel="{{ url_for('static', filename='css/style.css') }}"></link> -->
-  </head>
-
-  <body>
-    <!-- Navbar -->
+<body>
+<!-- Navbar -->
 <div class="w3-top">
   <div class="w3-bar w3-blue w3-card w3-left-align w3-large">
     <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
@@ -37,416 +23,215 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     <a href="/timeofyear" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Time Of Year</a>
     <a href="/prediction" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Predictions</a>
     <a href="/results" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Results</a>
-    <a href="/contactinfo" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Contact Information</a>
+    <a href="/contactinfo" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Contact Information</a>R
   </div>
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 4</a>
   </div>
-  <!-- Header -->
-  <header class="w3-container w3-blue w3-center" style="padding:128px 16px">
-  <h1 class="w3-margin w3-jumbo">Atlanta Crime</h1>
+</div>
+<!-- Header -->
+<header class="w3-container w3-blue w3-center" style="padding:128px 16px">
+  <h1 class="w3-margin w3-jumbo">Crime Predictor</h1>
   <p class="w3-xlarge">An Analysis from 2009-2019</p>
   <!-- <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top">Get Started</button> -->
-  </header>
+</header>
 
+    <!-- First Grid -->
+    <div class="w3-container">
+      <div class="w3-content">
+        <div>
+          <h1>Predictor Form Explanation</h1>
+          <h5 class="w3-padding-8">
+            The following form allows the user to select the independent variables that are
+            ultimately fed into our Machine Learning Model. The user will then be redirected to
+             a page where the most probable predicted crime will displayed based on a Deep
+            Learning model.
+          </h5>
 
-<!-- <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head> -->
-
-  <div class="w3-row-padding w3-padding-64 w3-container">
-    <div class="w3-content">
-        <div class="w3-third"> 
-    <h2 style="color: rgb(34, 31, 202)" style="text-align:center;" >Crime Prediction</h2>
-    <body>
-      <form action="http://localhost:5000/login" method="GET"> 
-        <!-- <p>Enter Name:</p>
-        <p><input type="text" name="nm" /></p>
-        <p><input type="submit" value="submit" /></p>   -->
-      </form> 
-      <form action="http://localhost:5000/prediction" method="POST">
-        <div class="form-group row">
-          <label
-            for="colFormLabelSm"
-            class="col-sm-2 col-form-label col-form-label-sm"
-            >Beat</label
-          > 
-          <div class="col-sm-10">
-            <input
-              type="number"
-              name="beat"
-              class="form-control form-control-sm"
-              id="colFormLabelSm"
-              value="604"
-            />
-          </div>
+          <p class="w3-text-grey">
+            Several tricks had to be implemented to get our model to deploy on heroku. Due to needing to import TensorFlow (>500Mb), and Heroku's build limit of less than ~300Mb, instead of including "tensorflow==2.4.1" in our requirements.txt file, "tensorflow-cpu==2.4.1" was included. This was found to be a slimmed down version of TensorFLow which enabled the ability to include our predictor.
+          </p>
+          <p class="w3-text-grey"> 
+            Additionally, Herokus default installed "wheel" version did not play well with the
+            machine learning tools. Since a "pip freeze" did not include wheel, a compatible
+            version was manuall included in requirements.txt to trick Heroku into install the
+             default and uninstalling it to install a compatible version "wheel==0.36.2".
+          </p>
+          <p class="w3-text-grey w3-padding-8">
+            Additionally, all unnecesary files were removed outside the repo such as our raw data which was over 60Mb.
+          </p>
+          <h5 class="w3-padding-8">
+            Select from the following options below to get a prediction of a crime based of a Deep-Learning model.
+          </h5>
         </div>
-        <div class="form-group row">
-          <label for="colFormLabel" class="col-sm-2 col-form-label"
-            >Occur Time</label
-          >
-          <div class="col-sm-10">
-            <input
-              type="number"
-              name="occur_time"
-              class="form-control"
-              id="colFormLabel"
-              value="1630"
-            />
-          </div> 
-        </div>
-        <label class="my-1 mr-2" for="inlineFormCustomSelectPref"
-          >Neighborhood</label
-        >
-        <select
-          class="custom-select my-1 mr-sm-2"
-          id="inlineFormCustomSelectPref"
-          name="neighborhood"
-        >
-          <option selected>Choose...</option>
-          <option value="0">Brookhaven</option>
-          <option value="1">Buckhead</option>
-          <option value="2">Downtown</option>
-          <option value="3">Midtown</option>
-          <option value="4">Old Fourth Ward</option>
-        </select>
-        <div class="form-group row">
-          <label
-            for="colFormLabelLg"
-            class="col-sm-2 col-form-label col-form-label-lg"
-            >Location Type</label
-          >
-          <div class="col-sm-10">
-            <input
-              type="number"
-              name="location_type"
-              class="form-control form-control-lg"
-              id="colFormLabelLg"
-              value="21"
-            />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label
-            for="colFormLabelLg"
-            class="col-sm-2 col-form-label col-form-label-lg"
-            >Latitude</label
-          >
-          <div class="col-sm-10">
-            <input
-              type="number"
-              name="latitude"
-              class="form-control form-control-lg"
-              id="colFormLabelLg"
-              value="33.76142"
-            />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label
-            for="colFormLabelLg"
-            class="col-sm-2 col-form-label col-form-label-lg"
-            >Longitude</label
-          >
-          <div class="col-sm-10">
-            <input
-              type="number"
-              name="longitude"
-              class="form-control form-control-lg"
-              id="colFormLabelLg"
-              value="-84.36492"
-            />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label
-            for="colFormLabelLg"
-            class="col-sm-2 col-form-label col-form-label-lg"
-            >Year</label
-          >
-          <div class="col-sm-10">
-            <input
-              type="text"
-              name="year"
-              class="form-control form-control-lg"
-              id="colFormLabelLg"
-              value="2013"
-            />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label
-            for="colFormLabelLg"
-            class="col-sm-2 col-form-label col-form-label-lg"
-            >Month</label
-          >
-          <div class="col-sm-10">
-            <input
-              type="number"
-              name="month"
-              class="form-control form-control-lg"
-              id="colFormLabelLg"
-              value="12"
-            />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label
-            for="colFormLabelLg"
-            class="col-sm-2 col-form-label col-form-label-lg"
-            >Day</label
-          >
-          <div class="col-sm-10">
-            <input
-              type="number"
-              name="day"
-              class="form-control form-control-lg"
-              id="colFormLabelLg"
-              value="16"
-            />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label
-            for="colFormLabelLg"
-            class="col-sm-2 col-form-label col-form-label-lg"
-            >DayofWeek</label
-          >
-          <!-- <div class="col-sm-10">
-            <input
-              type="number"
-              name="dayofweek"
-              class="form-control form-control-lg"
-              id="colFormLabelLg"
-              value="0"
-            />
-          </div>
-        </div> -->
-        <select
-          class="custom-select my-1 mr-sm-2"
-          id="inlineFormCustomSelectPref"
-          name="dayofweek"
-        >
-          <option selected>Choose...</option>
-          <option value="0">Monday</option>
-          <option value="1">Tuesday</option>
-          <option value="2">Wednesday</option>
-          <option value="3">Thursday</option>
-          <option value="4">Friday</option>
-          <option value="5">Saturday</option>
-          <option value="6">Sunday</option>
-        </select>
-        <p><input type="submit" value="submit" /></p>
-      </form>
-    </body>
-  </html>
-    
-
-      <!-- <form class="form-horizontal" action="/results" method="POST">
-        <form action="http://localhost:5000/prediction" method="POST"></form>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="beat" style="color: rgb(34, 31, 202)" style="text-align:center;">Beat:</label>
-            <div class="col-sm-10">
-                <input class="form-control"  step="1" id="beat" name="beat"  type="text"  data-trigger="hover focus"   data-toggle="popover" data-placement="right" >
-            </div> -->
-        <!-- </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="occur_time" style="color: rgb(34, 31, 202)">Occurance Time:</label>
-            <div class="col-sm-10">
-                <input class="form-control"  id="occur_time" name="occur_time" required type="text" step="0.01" data-trigger="hover focus"   data-toggle="popover" data-placement="right" >
-            </div>
-        </div>
-     -->
-        <!-- <div class="form-group">
-            <label class="control-label col-sm-2" for="neighborhood" style="color: rgb(34, 31, 202)">Neighborhood:</label>
-            <div class="col-sm-10">
-                <input class="form-control"  id="neighborhood" name="neighborhood" required type="text" step="0.01" data-trigger="hover focus"   data-toggle="popover" data-placement="right" >
-            </div>
-        </div> -->
-    
-        <!-- <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default">Submit</button> -->
-            <!-- </div>
-        </div>
-    </form>
       </div>
     </div>
-  </div> --> 
 
-  <!-- <body>
-    <form action="http://localhost:5000/login" method="GET"> -->
-      <!-- <p>Enter Name:</p>
-      <p><input type="text" name="nm" /></p>
-      <p><input type="submit" value="submit" /></p>  
-    </form> -->
-    <!-- <form action="http://localhost:5000/prediction" method="POST">
-      <div class="form-group row"> -->
-        <!-- <label -->
-          <!-- for="colFormLabelSm" -->
-          <!-- class="col-sm-2 col-form-label col-form-label-sm" -->
-          <!-- >Beat</label -->
-        <!-- >   -->
-        <!-- <div class="col-sm-10">
+<div class="w3-row-padding w3-padding-8 w3-container">
+  <div class="w3-content">
+      <div class="w3-third"> 
+  <h2 style="color: rgb(34, 31, 202)" style="text-align:center;" >Crime Prediction</h2>
+  <body>
+    <form action="http://localhost:5000/login" method="GET"> 
+    </form> 
+    <form action="http://localhost:5000/prediction" method="POST">
+      <div class="form-group row">
+        <label
+          for="colFormLabelSm"
+          class="col-sm-2 col-form-label col-form-label-sm"
+          >Beat</label
+        > 
+        <div class="col-sm-10">
           <input
             type="number"
             name="beat"
             class="form-control form-control-sm"
             id="colFormLabelSm"
             value="604"
-          /> -->
-        <!-- </div>
+          />
+        </div>
       </div>
       <div class="form-group row">
         <label for="colFormLabel" class="col-sm-2 col-form-label"
           >Occur Time</label
-        > -->
-        <!-- <div class="col-sm-10">
+        >
+        <div class="col-sm-10">
           <input
             type="number"
             name="occur_time"
             class="form-control"
             id="colFormLabel"
             value="1630"
-          /> -->
-        <!-- </div> -->
-      <!-- </div> -->
-      <!-- <label class="my-1 mr-2" for="inlineFormCustomSelectPref" -->
-        <!-- >Neighborhood</label
-      >  -->
-      <!-- <select
+          />
+        </div> 
+      </div>
+      <label class="my-1 mr-2" for="inlineFormCustomSelectPref"
+        >Neighborhood</label
+      >
+      <select
         class="custom-select my-1 mr-sm-2"
         id="inlineFormCustomSelectPref"
         name="neighborhood"
-      > -->
-        <!-- <option selected>Choose...</option>
+      >
+        <option selected>Choose...</option>
         <option value="0">Brookhaven</option>
         <option value="1">Buckhead</option>
         <option value="2">Downtown</option>
         <option value="3">Midtown</option>
         <option value="4">Old Fourth Ward</option>
-      </select> -->
-      <!-- <div class="form-group row">
+      </select>
+      <div class="form-group row">
         <label
           for="colFormLabelLg"
           class="col-sm-2 col-form-label col-form-label-lg"
           >Location Type</label
-        > -->
-        <!-- <div class="col-sm-10">
+        >
+        <div class="col-sm-10">
           <input
             type="number"
             name="location_type"
             class="form-control form-control-lg"
             id="colFormLabelLg"
             value="21"
-          /> -->
-        <!-- </div>
+          />
+        </div>
       </div>
       <div class="form-group row">
         <label
           for="colFormLabelLg"
           class="col-sm-2 col-form-label col-form-label-lg"
           >Latitude</label
-        > -->
-        <!-- <div class="col-sm-10">
+        >
+        <div class="col-sm-10">
           <input
             type="number"
             name="latitude"
             class="form-control form-control-lg"
             id="colFormLabelLg"
             value="33.76142"
-          /> -->
-        <!-- </div>
+          />
+        </div>
       </div>
       <div class="form-group row">
         <label
           for="colFormLabelLg"
           class="col-sm-2 col-form-label col-form-label-lg"
           >Longitude</label
-        > -->
-        <!-- <div class="col-sm-10">
+        >
+        <div class="col-sm-10">
           <input
             type="number"
             name="longitude"
             class="form-control form-control-lg"
             id="colFormLabelLg"
             value="-84.36492"
-          /> -->
-        <!-- </div>
+          />
+        </div>
       </div>
       <div class="form-group row">
         <label
           for="colFormLabelLg"
           class="col-sm-2 col-form-label col-form-label-lg"
           >Year</label
-        > -->
-        <!-- <div class="col-sm-10">
+        >
+        <div class="col-sm-10">
           <input
             type="text"
             name="year"
             class="form-control form-control-lg"
             id="colFormLabelLg"
             value="2013"
-          /> -->
-        <!-- </div>
+          />
+        </div>
       </div>
       <div class="form-group row">
         <label
           for="colFormLabelLg"
           class="col-sm-2 col-form-label col-form-label-lg"
           >Month</label
-        > -->
-        <!-- <div class="col-sm-10">
+        >
+        <div class="col-sm-10">
           <input
             type="number"
             name="month"
             class="form-control form-control-lg"
             id="colFormLabelLg"
             value="12"
-          /> -->
-        <!-- </div>
+          />
+        </div>
       </div>
       <div class="form-group row">
         <label
           for="colFormLabelLg"
           class="col-sm-2 col-form-label col-form-label-lg"
           >Day</label
-        > -->
-        <!-- <div class="col-sm-10">
+        >
+        <div class="col-sm-10">
           <input
             type="number"
             name="day"
             class="form-control form-control-lg"
             id="colFormLabelLg"
             value="16"
-          /> -->
-        <!-- </div>
+          />
+        </div>
       </div>
       <div class="form-group row">
         <label
           for="colFormLabelLg"
           class="col-sm-2 col-form-label col-form-label-lg"
           >DayofWeek</label
-        > -->
-        <!-- <div class="col-sm-10">
-          <input
-            type="number"
-            name="dayofweek"
-            class="form-control form-control-lg"
-            id="colFormLabelLg"
-            value="0"
-          />
-        </div>
-      </div> -->
-      <!-- <select
+        >
+      <select
         class="custom-select my-1 mr-sm-2"
         id="inlineFormCustomSelectPref"
         name="dayofweek"
-      > -->
-        <!-- <option selected>Choose...</option>
+      >
+        <option selected>Choose...</option>
         <option value="0">Monday</option>
         <option value="1">Tuesday</option>
         <option value="2">Wednesday</option>
@@ -458,4 +243,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
       <p><input type="submit" value="submit" /></p>
     </form>
   </body>
-</html> -->
+  </div>
+</div>
+
+
+</html>
